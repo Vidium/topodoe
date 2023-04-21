@@ -2,16 +2,16 @@
 
 # ====================================================
 # imports
+from typing import Collection
+
 import ensembl_rest
 import numpy as np
-
 import numpy.typing as npt
-from typing import Collection
 
 
 # ====================================================
 # code
-def names_from_ids(species: str, genes: Collection[str]) -> npt.NDArray[str]:
+def names_from_ids(species: str, genes: Collection[str]) -> npt.NDArray[np.str_]:
     raise NotImplementedError
 
     res = ensembl_rest.lookup_post(species=species,
@@ -25,7 +25,7 @@ def names_from_ids(species: str, genes: Collection[str]) -> npt.NDArray[str]:
     return np.array([gene['id'] for gene in res.values()])
 
 
-def ids_from_names(species: str, genes: Collection[str]) -> npt.NDArray[str]:
+def ids_from_names(species: str, genes: Collection[str]) -> npt.NDArray[np.str_]:
     raise NotImplementedError
 
     res = ensembl_rest.symbol_post(species=species,
