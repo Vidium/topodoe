@@ -587,20 +587,20 @@ class GrnCollection:
             _gene_list = np.sort(self.list_gene_ids) if sort_gene_names else self.list_gene_ids
 
             permutation = npi.indices(self.list_gene_ids, _gene_list)
-            node_names = np.concatenate((self.list_gene_ids, _gene_list))
+            node_names = np.concatenate((self.list_stimuli_ids, _gene_list))
             gene_names = _gene_list
 
         elif gene_names_as == 'name':
             _gene_list = np.sort(self.list_gene_names) if sort_gene_names else self.list_gene_names
 
             permutation = npi.indices(self.list_gene_names, _gene_list)
-            node_names = np.concatenate((self.list_gene_names, _gene_list))
+            node_names = np.concatenate((self.list_stimuli_ids, _gene_list))
             gene_names = _gene_list
 
         else:
             raise ValueError(f"Invalid gene name type '{gene_names_as}'.")
 
-        rows_permutation = np.concatenate((list(range(self.nb_stimuli)), permutation))
+        rows_permutation = np.concatenate((list(range(self.nb_stimuli)), permutation + self.nb_stimuli))
 
         # get interaction values
         merged_array = merged_grn.interactions[np.ix_(rows_permutation, permutation)]
